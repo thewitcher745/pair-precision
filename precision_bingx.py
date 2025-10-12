@@ -1,4 +1,5 @@
 import json
+import time
 import requests
 
 # Import the list of coins from the logo_list.json file
@@ -17,6 +18,7 @@ for i, coin in enumerate(coin_list):
 
     result = data_points.json()["data"]
     if not isinstance(result, list):
+        print(coin, "skipped")
         continue
 
     price_samples = []
@@ -42,6 +44,7 @@ for i, coin in enumerate(coin_list):
 
     precisions[coin] = precision
     print(f"{i}/{count} {coin} {precision}")
+    time.sleep(0.5)
 
 # Write the precisions to a CSV file, with the first column being the coin name and the second column being the precision
 with open("./precisions_bingx.csv", "w") as f:
